@@ -16,42 +16,557 @@ knitr::opts_chunk$set(
 # ggbranding
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/yourusername/ggbranding/workflows/R-CMD-check/badge.svg)](https://github.com/yourusername/ggbranding/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/ggbranding)](https://CRAN.R-project.org/package=ggbranding)
 <!-- badges: end -->
 
-The goal of ggbranding is to ...
+> Add personal branding to ggplot2 charts using Font Awesome 7 icons
+
+**Key Features:**
+
+- 🚀 **Auto Font Setup** - Automatically downloads Font Awesome 7 fonts on first use
+- 🎨 **500+ Icons** - Access to all Font Awesome brand and communication icons
+- 🎯 **One Function Call** - Add complete branding with `add_branding()`
+- 🎨 **Customizable** - Brand colors, custom text, and styling options
+- 📦 **Lightweight** - Efficient font caching and minimal dependencies
 
 ## Installation
 
-You can install the development version of ggbranding from [GitHub](https://github.com/) with:
+Install the development version from GitHub:
 
-``` r
-# install.packages("pak")
+```{r installation, eval=FALSE}
+# library(pak)
 pak::pak("gnoblet/ggbranding")
+# CRAN version to come
 ```
 
-## Example
+## Quick Start
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
+```{r quick-start}
+library(ggplot2)
+library(ggtext)
 library(ggbranding)
-## basic example code
+library(showtext)
+
+# setup dpi
+showtext::showtext_opts(dpi = 240)
+
+# Add branding with + in ggplot chain
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point() +
+  labs(title = "My Awesome Plot") +
+  add_branding(
+    github = "yourusername",
+    linkedin = "yourprofile"
+  )
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+That's it! The function automatically:
 
-```{r cars}
-summary(cars)
+- Downloads and sets up Font Awesome 7 fonts
+- Applies `ggtext::element_textbox_simple()` theme
+- Creates HTML-formatted captions with icons
+- Handles text sanitization for grid rendering
+
+## Core Functions
+
+### `add_branding()` - Complete Branding Solution
+
+Use with `+` in your ggplot chain:
+
+```{r add-branding-basic}
+# Basic usage with +
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point() +
+  add_branding(
+    github = "yourusername",
+    linkedin = "yourprofile"
+  )
+
+# With additional text before branding
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point() +
+  add_branding(
+    github = "yourusername",
+    additional_text = "Data source: iris dataset",
+    text_position = "before",
+    line_spacing = 2L, # double line breaks for extra space
+    icon_color = "steelblue",
+    text_color = "steelblue"
+  )
+
+# With additional text after branding
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point() +
+  add_branding(
+    github = "yourusername",
+    additional_text = "Data source: mtcars dataset",
+    text_position = "after"
+  )
+
+# With custom styling
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point() +
+  add_branding(
+    github = "yourusername",
+    use_brand_colors = TRUE,
+    caption_halign = 1, # right-align caption
+    icon_size = "12pt", # larger icons
+    text_size = "8pt" # smaller text
+  )
+
+# With package branding
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point() +
+  add_branding(
+    github = "yourusername",
+    additional_text = "**Made with ❤️ and Font Awesome 7 • Add your branding today!**",
+    text_position = "after",
+    caption_halign = 0.5
+  )
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
 
-You can also embed plots, for example:
+## Supported Platforms
 
-```{r pressure, echo = FALSE}
-plot(pressure)
+Built-in support for major platforms:
+
+```{r platforms-table}
+# Built-in platforms
+platforms <- c(
+  "github",
+  "gitlab",
+  "linkedin",
+  "bluesky",
+  "twitter",
+  "mastodon",
+  "orcid",
+  "email",
+  "website"
+)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+| Platform | Parameter | Example |
+|----------|-----------|---------|
+| GitHub | `github` | `github = "username"` |
+| GitLab | `gitlab` | `gitlab = "username"` |
+| LinkedIn | `linkedin` | `linkedin = "profile"` |
+| Bluesky | `bluesky` | `bluesky = "user.bsky.social"` |
+| Twitter/X | `twitter` | `twitter = "handle"` |
+| Mastodon | `mastodon` | `mastodon = "@user@server.com"` |
+| ORCID | `orcid` | `orcid = "0000-0000-0000-0000"` |
+| Email | `email` | `email = "user@email.com"` |
+| Website | `website` | `website = "yoursite.com"` |
+
+## Custom Icons
+
+Access 500+ Font Awesome icons with `custom_icons`:
+
+```{r custom-icons}
+# Discover available icons
+list_available_icons() |> head(5)
+
+# Search for specific icons
+list_available_icons(search = "envelope")
+list_available_icons(search = "phone")
+list_available_icons(search = "rss")
+
+# Use custom icons
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point() +
+  add_branding(
+    github = "yourusername",
+    custom_icons = c(
+      envelope = "contact@example.com",
+      globe = "https://mywebsite.com",
+      rss = "myblog",
+      phone = "+1-555-0123"
+    )
+  )
+```
+
+## Advanced Examples
+
+### Publication-Ready Plot
+
+```{r publication-plot}
+library(dplyr)
+
+# Create a complete publication plot
+mtcars |>
+  ggplot(aes(x = mpg, y = wt, color = factor(cyl))) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, linetype = "dashed") +
+  scale_color_viridis_d(name = "Cylinders") +
+  labs(
+    title = "Car Weight vs Fuel Efficiency",
+    subtitle = "Motor Trend Car Road Tests (1974)",
+    x = "Miles per Gallon",
+    y = "Weight (1000 lbs)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12, color = "grey60"),
+    legend.position = "bottom"
+  ) +
+  add_branding(
+    github = "yourusername",
+    orcid = "0000-0000-0000-0000",
+    additional_text = "Data: Motor Trend Car Road Tests (1974)",
+    use_brand_colors = TRUE,
+    caption_halign = 0.5, # center-align
+    icon_size = "12pt",
+    text_size = "10pt"
+  )
+```
+
+### With Communication Icons
+
+```{r communication-icons, eval=FALSE}
+# Academic/professional branding
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point() +
+  add_branding(
+    github = "yourusername",
+    orcid = "0000-0000-0000-0000",
+    custom_icons = c(
+      envelope = "researcher@university.edu",
+      globe = "https://researcher.university.edu",
+      phone = "+1-555-RESEARCH"
+    ),
+    additional_text = "University Research Lab",
+    text_position = "before",
+    use_brand_colors = TRUE,
+    icon_size = "10pt",
+    text_size = "9pt"
+  )
+```
+
+### Tech Project Branding
+
+```{r tech-branding, eval=FALSE}
+# Developer/tech project branding
+ggplot(tech_data, aes(x = metric, y = value)) +
+  geom_bar(stat = "identity") +
+  add_branding(
+    github = "yourproject",
+    custom_icons = c(
+      link = "https://project-docs.com",
+      rss = "project-blog"
+    ),
+    additional_text = "Open Source Project • MIT License",
+    separator = " | ",
+    icon_color = "#2E3440",
+    text_color = "#5E81AC"
+  )
+```
+
+### Corporate Branding
+
+```{r corporate-branding, eval=FALSE}
+# Company/corporate branding
+ggplot(mpg, aes(x = class)) +
+  geom_col() +
+  add_branding(
+    linkedin = "company-profile",
+    website = "company.com",
+    custom_icons = c(
+      envelope = "info@company.com",
+      phone = "+1-800-COMPANY"
+    ),
+    additional_text = "© 2024 Company Name • All Rights Reserved",
+    text_position = "after",
+    caption_halign = 1, # right-align for corporate look
+    icon_size = "7pt",
+    text_size = "7pt"
+  )
+```
+
+## Font Management
+
+The package handles fonts automatically, but you can control the process:
+
+```{r font-management, eval=FALSE}
+# Check if fonts are properly loaded
+fa_setup()
+
+# Download fonts manually if needed
+fa_download(version = "7.0.1")
+
+# Clear font cache
+clear_font_cache_dir()
+
+# Get font cache location
+get_font_cache_dir()
+```
+
+## Styling Options
+
+### Caption Alignment
+
+```{r alignment, eval = FALSE}
+# Left-aligned (default)
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(github = "username", caption_halign = 0)
+
+# Center-aligned
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(github = "username", caption_halign = 0.5)
+
+# Right-aligned
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(github = "username", caption_halign = 1)
+```
+
+### Brand Colors
+
+```{r brand-colors, eval=FALSE}
+# Use official brand colors
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(
+    github = "username",
+    linkedin = "profile",
+    use_brand_colors = TRUE
+  )
+
+# Custom colors
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(
+    github = "username",
+    icon_color = "#FF6B6B",
+    text_color = "#4ECDC4"
+  )
+```
+
+### Text Formatting
+
+```{r text-formatting, eval=FALSE}
+# Custom separators and sizing
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(
+    github = "username",
+    linkedin = "profile",
+    separator = " • ",
+    icon_size = "12pt", # larger icons
+    text_size = "9pt" # smaller text
+  )
+
+# Different icon and text sizes
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(
+    github = "username",
+    icon_size = "14pt", # big icons
+    text_size = "7pt" # small text
+  )
+
+# Custom separator styling
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(
+    github = "username",
+    linkedin = "profile",
+    separator = " ◆ ",
+    separator_size = "6pt", # smaller separator
+    separator_color = "#999999" # lighter separator
+  )
+
+# Line height adjustment
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(
+    github = "username",
+    additional_text = "Data source: Multiple lines of text",
+    line_height = "1.5", # more spacing between lines
+    text_position = "before"
+  )
+
+# With width constraints
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(
+    github = "username",
+    caption_width = "80%",
+    caption_margin = margin(t = 10, r = 5, b = 5, l = 5)
+  )
+
+# Complete styling example
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  add_branding(
+    github = "username",
+    linkedin = "profile",
+    custom_icons = c(envelope = "contact@email.com"),
+    additional_text = "Custom styled branding example",
+    text_position = "before",
+    separator = " ◆ ",
+    separator_size = "10pt",
+    separator_color = "#666666",
+    icon_size = "12pt",
+    text_size = "8pt",
+    line_height = "1.4",
+    icon_color = "#2E3440",
+    text_color = "#5E81AC",
+    caption_halign = 0.5
+  )
+```
+
+## Real-World Use Cases
+
+### Research Paper Figures
+
+```{r research-example, eval=FALSE}
+# For academic publications
+mtcars |>
+  ggplot(aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  labs(
+    title = "Figure 1: Treatment Effects on Response Variable",
+    subtitle = "n = 120, p < 0.001"
+  ) +
+  add_branding(
+    orcid = "0000-0000-0000-0000",
+    github = "research-lab",
+    additional_text = "Data: Clinical Trial 2024 • IRB #2024-001",
+    text_position = "before",
+    icon_size = "9pt",
+    text_size = "8pt",
+    caption_halign = 0
+  )
+```
+
+### Data Science Portfolio
+
+```{r portfolio-example, eval=FALSE}
+# For portfolio projects
+portfolio_plot <- economics |>
+  ggplot(aes(x = date, y = unemploy)) +
+  geom_line() +
+  labs(
+    title = "US Unemployment Over Time",
+    subtitle = "Economic data analysis"
+  ) +
+  add_branding(
+    github = "data-scientist",
+    linkedin = "data-scientist-profile",
+    custom_icons = c(
+      globe = "portfolio-website.com"
+    ),
+    additional_text = "Data Science Portfolio Project",
+    use_brand_colors = TRUE,
+    caption_halign = 0.5
+  )
+```
+
+### Business Reports
+
+```{r business-example, eval=FALSE}
+# For business/consulting reports
+quarterly_report <- sales_data |>
+  ggplot(aes(x = quarter, y = revenue, fill = region)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Q4 2024 Revenue by Region",
+    subtitle = "Year-over-year growth: +15%"
+  ) +
+  add_branding(
+    linkedin = "consulting-firm",
+    website = "consulting-firm.com",
+    custom_icons = c(
+      envelope = "contact@consulting-firm.com"
+    ),
+    additional_text = "Confidential • Client Report",
+    text_position = "after",
+    caption_halign = 1
+  )
+```
+
+## Troubleshooting
+
+### Common Issues
+
+```{r troubleshooting}
+# 1. Icons not displaying
+fa_setup(auto_download = TRUE)
+
+# 2. Clear cache if fonts seem corrupted
+clear_font_cache_dir(confirm = FALSE)
+
+# 3. Check available icons
+head(list_available_icons())
+
+# 4. Test basic functionality
+branding(github = "test")
+```
+
+### Manual Font Setup (If Needed)
+
+```{r manual-setup, eval=FALSE}
+library(sysfonts)
+library(showtext)
+
+# Download Font Awesome 7 from https://fontawesome.com/download
+# Extract and use the Brands font file
+sysfonts::font_add(
+  family = "Font Awesome 7 Brands",
+  regular = "path/to/Font-Awesome-7-Brands-Regular-400.otf"
+)
+showtext::showtext_auto()
+
+# Then use with setup_fonts = FALSE
+branding(github = "username", setup_fonts = FALSE)
+```
+
+## Dependencies
+
+- `ggplot2` - Plot creation
+- `ggtext` - HTML text rendering
+- `glue` - String formatting
+- `sysfonts` - Font loading
+- `showtext` - Font rendering
+- `httr2` - Font downloading
+- `checkmate` - Parameter validation
+- `purrr` - Functional programming
+- `fs` - File system operations
+
+## Contributing
+
+Contributions welcome! Priority areas:
+
+1. **New Icons**: Add support for additional platforms
+2. **Layouts**: New caption layout options
+3. **Styling**: Enhanced visual customization
+4. **Documentation**: More examples and use cases
+
+```{r contribute-example}
+# To add a new platform, update the branding() function
+# and add corresponding icons to icons_df dataset
+```
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file.
+
+## Citation
+
+```{r citation, eval=FALSE}
+# Will be available when package is complete
+citation("ggbranding")
+```
+
+## Acknowledgments
+
+- Inspired by [Nicola Rennie's blog post](https://nrennie.rbind.io/blog/adding-social-media-icons-ggplot2/)
+- Font Awesome team for excellent iconography
+- R community for ggplot2, ggtext, and ecosystem packages
+
+---
+
+**Made with ♥ and Font Awesome 7 • Add your branding today!**
