@@ -11,4 +11,4 @@ if (Sys.info()[['nodename']] == 'fedora') {
   ) |>
     renv::lockfile_write()
 }
-source("renv/activate.R")
+# source("renv/activate.R")
