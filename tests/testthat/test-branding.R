@@ -27,6 +27,12 @@ test_that("branding parameter validation works", {
     branding(text_family = ""),
     regexp = "must have at least 1 characters"
   )
+  # text_family = NULL should be allowed
+  expect_no_error(branding(
+    github = "test",
+    text_family = NULL,
+    setup_fonts = FALSE
+  ))
 })
 
 test_that("branding returns HTML string", {
@@ -209,6 +215,7 @@ test_that("branding applies styling correctly", {
 })
 
 test_that("branding applies text_family correctly", {
+  # Test with specified font family
   result <- branding(
     github = "testuser",
     text_family = "Arial",
@@ -217,11 +224,20 @@ test_that("branding applies text_family correctly", {
 
   expect_true(grepl("font-family: Arial", result))
 
-  # Test default text_family
+  # Test default text_family (NULL) - should NOT include font-family
   result_default <- branding(
     github = "testuser",
     setup_fonts = FALSE
   )
 
-  expect_true(grepl("font-family: sans", result_default))
+  expect_false(grepl("font-family:", result_default))
+
+  # Test with NULL explicitly
+  result_null <- branding(
+    github = "testuser",
+    text_family = NULL,
+    setup_fonts = FALSE
+  )
+
+  expect_false(grepl("font-family:", result_null))
 })

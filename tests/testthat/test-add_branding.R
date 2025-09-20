@@ -11,6 +11,12 @@ test_that("add_branding parameter validation works", {
     add_branding(text_family = ""),
     regexp = "must have at least 1 characters"
   )
+  # text_family = NULL should be allowed
+  expect_no_error(add_branding(
+    github = "test",
+    text_family = NULL,
+    setup_fonts = FALSE
+  ))
 })
 
 test_that("add_branding requires ggtext package", {
@@ -219,11 +225,20 @@ test_that("add_branding handles text_family parameter", {
 
   expect_equal(captured_params$text_family, "Times")
 
-  # Test default text_family
+  # Test default text_family (should be NULL)
   add_branding(
     github = "test",
     setup_fonts = FALSE
   )
 
-  expect_equal(captured_params$text_family, "sans")
+  expect_equal(captured_params$text_family, NULL)
+
+  # Test with NULL explicitly
+  add_branding(
+    github = "test",
+    text_family = NULL,
+    setup_fonts = FALSE
+  )
+
+  expect_equal(captured_params$text_family, NULL)
 })

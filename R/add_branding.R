@@ -42,8 +42,8 @@
 #'   Font size for text/usernames. (default: "8pt")
 #' @typed line_height: character(1)
 #'   Line height for the caption. (default: "1.2")
-#' @typed text_family: character(1)
-#'   Font family for text/usernames. (default: "sans")
+#' @typed text_family: NULL | character(1)
+#'   Font family for text/usernames. (default: NULL uses system default)
 #' @typed setup_fonts: logical(1)
 #'   Whether to automatically setup Font Awesome fonts. (default: TRUE)
 #' @typed caption_width: NULL | character(1)
@@ -115,7 +115,7 @@ add_branding <- function(
   icon_size = "8pt",
   text_size = "8pt",
   line_height = "1.2",
-  text_family = "sans",
+  text_family = NULL,
   setup_fonts = TRUE,
   caption_width = NULL,
   caption_halign = 0,
@@ -149,7 +149,7 @@ add_branding <- function(
   checkmate::assert_string(icon_size, min.chars = 1)
   checkmate::assert_string(text_size, min.chars = 1)
   checkmate::assert_string(line_height, min.chars = 1)
-  checkmate::assert_string(text_family, min.chars = 1)
+  checkmate::assert_string(text_family, null.ok = TRUE, min.chars = 1)
   checkmate::assert_logical(setup_fonts, len = 1, any.missing = FALSE)
   checkmate::assert_string(caption_width, null.ok = TRUE, min.chars = 1)
   checkmate::assert_number(caption_halign, lower = 0, upper = 1)
