@@ -8,6 +8,8 @@
 [![R-CMD-check](https://github.com/yourusername/ggbranding/workflows/R-CMD-check/badge.svg)](https://github.com/yourusername/ggbranding/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggbranding)](https://CRAN.R-project.org/package=ggbranding)
+[![Codecov test
+coverage](https://codecov.io/gh/gnoblet/ggbranding/graph/badge.svg)](https://app.codecov.io/gh/gnoblet/ggbranding)
 <!-- badges: end -->
 
 > Add personal branding to ggplot2 charts using Font Awesome 7 icons
