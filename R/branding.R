@@ -43,6 +43,10 @@
 #'   Line height for the caption. (default: "1.2")
 #' @typed text_family: NULL | character(1)
 #'   Font family for text/usernames. (default: NULL uses system default)
+#' @typed additional_text_color: NULL | character(1)
+#'   Color for additional text. If NULL, uses text_color. (default: NULL)
+#' @typed additional_text_size: NULL | character(1)
+#'   Font size for additional text. If NULL, uses text_size. (default: NULL)
 #' @typed setup_fonts: logical(1)
 #'   Whether to automatically setup Font Awesome fonts. (default: TRUE)
 #'
@@ -113,6 +117,8 @@ branding <- function(
   text_size = "8pt",
   line_height = "1.2",
   text_family = NULL,
+  additional_text_color = NULL,
+  additional_text_size = NULL,
   setup_fonts = TRUE
 ) {
   #------ PARAMETER VALIDATION ------#
@@ -150,6 +156,8 @@ branding <- function(
   checkmate::assert_string(text_size, min.chars = 1)
   checkmate::assert_string(line_height, min.chars = 1)
   checkmate::assert_string(text_family, null.ok = TRUE, min.chars = 1)
+  checkmate::assert_string(additional_text_color, null.ok = TRUE, min.chars = 1)
+  checkmate::assert_string(additional_text_size, null.ok = TRUE, min.chars = 1)
   checkmate::assert_logical(setup_fonts, len = 1, any.missing = FALSE)
 
   # names of custom icons exist in icons_df
@@ -242,13 +250,25 @@ branding <- function(
   # combine with additional text if provided
   final_caption <- branding_caption
   if (!is.null(additional_text)) {
+    # Use specific additional text styling or fall back to main text styling
+    final_text_color <- if (!is.null(additional_text_color)) {
+      additional_text_color
+    } else {
+      text_color
+    }
+    final_text_size <- if (!is.null(additional_text_size)) {
+      additional_text_size
+    } else {
+      text_size
+    }
+
     additional_text_style <- if (is.null(text_family)) {
       glue::glue(
-        "color: {text_color}; font-size: {text_size}; line-height: {line_height};"
+        "color: {final_text_color}; font-size: {final_text_size}; line-height: {line_height};"
       )
     } else {
       glue::glue(
-        "font-family: {text_family}; color: {text_color}; font-size: {text_size}; line-height: {line_height};"
+        "font-family: {text_family}; color: {final_text_color}; font-size: {final_text_size}; line-height: {line_height};"
       )
     }
 

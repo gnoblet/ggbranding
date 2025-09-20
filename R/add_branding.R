@@ -44,6 +44,10 @@
 #'   Line height for the caption. (default: "1.2")
 #' @typed text_family: NULL | character(1)
 #'   Font family for text/usernames. (default: NULL uses system default)
+#' @typed additional_text_color: NULL | character(1)
+#'   Color for additional text. If NULL, uses text_color. (default: NULL)
+#' @typed additional_text_size: NULL | character(1)
+#'   Font size for additional text. If NULL, uses text_size. (default: NULL)
 #' @typed setup_fonts: logical(1)
 #'   Whether to automatically setup Font Awesome fonts. (default: TRUE)
 #' @typed caption_width: NULL | character(1)
@@ -116,6 +120,8 @@ add_branding <- function(
   text_size = "8pt",
   line_height = "1.2",
   text_family = NULL,
+  additional_text_color = NULL,
+  additional_text_size = NULL,
   setup_fonts = TRUE,
   caption_width = NULL,
   caption_halign = 0,
@@ -150,6 +156,8 @@ add_branding <- function(
   checkmate::assert_string(text_size, min.chars = 1)
   checkmate::assert_string(line_height, min.chars = 1)
   checkmate::assert_string(text_family, null.ok = TRUE, min.chars = 1)
+  checkmate::assert_string(additional_text_color, null.ok = TRUE, min.chars = 1)
+  checkmate::assert_string(additional_text_size, null.ok = TRUE, min.chars = 1)
   checkmate::assert_logical(setup_fonts, len = 1, any.missing = FALSE)
   checkmate::assert_string(caption_width, null.ok = TRUE, min.chars = 1)
   checkmate::assert_number(caption_halign, lower = 0, upper = 1)
@@ -187,6 +195,8 @@ add_branding <- function(
     text_size = text_size,
     line_height = line_height,
     text_family = text_family,
+    additional_text_color = additional_text_color,
+    additional_text_size = additional_text_size,
     setup_fonts = setup_fonts
   )
 
