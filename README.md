@@ -3,9 +3,11 @@
 
 # ggbranding
 
+<a href="https://gnoblet.github.io/ggbranding/"><img src="man/figures/logo.svg" align="right" height="139" alt="ggbranding website" /></a>
+
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/yourusername/ggbranding/workflows/R-CMD-check/badge.svg)](https://github.com/yourusername/ggbranding/actions)
+[![R-CMD-check](https://github.com/gnoblet/ggbranding/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gnoblet/ggbranding/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggbranding)](https://CRAN.R-project.org/package=ggbranding)
 [![Codecov test
