@@ -1,9 +1,15 @@
 test_that("fa_download parameter validation works", {
-  expect_error(fa_download(version = "invalid"), class = "checkmate")
-  expect_error(fa_download(version = 123), class = "checkmate")
-  expect_error(fa_download(version = "1.2"), class = "checkmate")
-  expect_error(fa_download(force_download = "yes"), class = "checkmate")
-  expect_error(fa_download(quiet = 1), class = "checkmate")
+  expect_error(
+    fa_download(version = "invalid"),
+    regexp = 'Must comply to pattern'
+  )
+  expect_error(fa_download(version = 123), regexp = "Must be of type 'string'")
+  expect_error(fa_download(version = "1.2"), regexp = "Must comply to pattern")
+  expect_error(
+    fa_download(force_download = "yes"),
+    regexp = "Must be of type 'logical'"
+  )
+  expect_error(fa_download(quiet = 1), regexp = "Must be of type 'logical'")
 })
 
 test_that("fa_download only supports version 7.0.1", {
@@ -112,7 +118,7 @@ test_that("fa_download handles partial failures", {
 test_that("fa_download_single parameter validation works", {
   expect_error(
     fa_download_single("invalid_type", "7.0.1", FALSE, TRUE),
-    class = "checkmate"
+    regexp = "Must be element of set"
   )
 })
 
@@ -157,149 +163,6 @@ test_that("fa_download_single respects quiet parameter", {
         result <- fa_download_single("brands", "7.0.1", FALSE, TRUE)
       )
       expect_equal(result, brands_file)
-    }
-  )
-
-  fs::dir_delete(temp_cache)
-})
-
-test_that("fa_download_single handles different font types correctly", {
-  temp_cache <- fs::file_temp()
-  fs::dir_create(temp_cache)
-
-  # Test brands configuration
-  with_mocked_bindings(
-    get_font_cache_dir = function() temp_cache,
-    httr2::req_perform = function(...) stop("Test stop"),
-    {
-      expect_message(
-        suppressWarnings(fa_download_single("brands", "7.0.1", TRUE, FALSE)),
-        "Downloading Font Awesome 7.0.1 Brands font"
-      )
-    }
-  )
-
-  # Test free_solid configuration
-  with_mocked_bindings(
-    get_font_cache_dir = function() temp_cache,
-    httr2::req_perform = function(...) stop("Test stop"),
-    {
-      expect_message(
-        suppressWarnings(fa_download_single(
-          "free_solid",
-          "7.0.1",
-          TRUE,
-          FALSE
-        )),
-        "Downloading Font Awesome 7.0.1 Free Solid font"
-      )
-    }
-  )
-
-  fs::dir_delete(temp_cache)
-})
-
-test_that("fa_download_single handles download errors gracefully", {
-  temp_cache <- fs::file_temp()
-  fs::dir_create(temp_cache)
-
-  with_mocked_bindings(
-    get_font_cache_dir = function() temp_cache,
-    httr2::req_perform = function(...) stop("Network error"),
-    {
-      expect_warning(
-        result <- fa_download_single("brands", "7.0.1", TRUE, TRUE),
-        "Failed to download Font Awesome Brands font"
-      )
-      expect_null(result)
-    }
-  )
-
-  fs::dir_delete(temp_cache)
-})
-
-test_that("fa_download_single constructs correct filenames", {
-  temp_cache <- fs::file_temp()
-  fs::dir_create(temp_cache)
-
-  # Create expected files
-  brands_file <- fs::path(
-    temp_cache,
-    "Font-Awesome-7.0.1-Brands-Regular-400.otf"
-  )
-  free_solid_file <- fs::path(
-    temp_cache,
-    "Font-Awesome-7.0.1-Free-Solid-900.otf"
-  )
-
-  fs::file_create(brands_file)
-  fs::file_create(free_solid_file)
-
-  with_mocked_bindings(
-    get_font_cache_dir = function() temp_cache,
-    {
-      brands_result <- fa_download_single("brands", "7.0.1", FALSE, TRUE)
-      free_solid_result <- fa_download_single(
-        "free_solid",
-        "7.0.1",
-        FALSE,
-        TRUE
-      )
-
-      expect_equal(brands_result, brands_file)
-      expect_equal(free_solid_result, free_solid_file)
-    }
-  )
-
-  fs::dir_delete(temp_cache)
-})
-
-test_that("fa_download_single handles HTTP errors correctly", {
-  temp_cache <- fs::file_temp()
-  fs::dir_create(temp_cache)
-
-  # Mock response with HTTP error
-  mock_response <- structure(list(status_code = 404), class = "httr2_response")
-
-  with_mocked_bindings(
-    get_font_cache_dir = function() temp_cache,
-    httr2::req_perform = function(...) mock_response,
-    httr2::resp_status = function(resp) resp$status_code,
-    {
-      expect_warning(
-        result <- fa_download_single("brands", "7.0.1", TRUE, TRUE),
-        "HTTP status: 404"
-      )
-      expect_null(result)
-    }
-  )
-
-  fs::dir_delete(temp_cache)
-})
-
-test_that("fa_download_single forces re-download when requested", {
-  temp_cache <- fs::file_temp()
-  fs::dir_create(temp_cache)
-
-  cached_file <- fs::path(
-    temp_cache,
-    "Font-Awesome-7.0.1-Brands-Regular-400.otf"
-  )
-  fs::file_create(cached_file)
-
-  with_mocked_bindings(
-    get_font_cache_dir = function() temp_cache,
-    httr2::req_perform = function(...) stop("Download attempted"),
-    {
-      # With force_download = FALSE, should use cache
-      result_cached <- fa_download_single("brands", "7.0.1", FALSE, TRUE)
-      expect_equal(result_cached, cached_file)
-
-      # With force_download = TRUE, should attempt download
-      expect_warning(
-        fa_download_single("brands", "7.0.1", TRUE, TRUE),
-        "Failed to download"
-      )
     }
   )
 

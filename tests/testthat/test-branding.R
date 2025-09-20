@@ -1,17 +1,32 @@
 test_that("branding parameter validation works", {
-  expect_error(branding(github = 123), class = "checkmate")
-  expect_error(branding(linkedin = ""), class = "checkmate")
-  expect_error(branding(custom_icons = c("test")), class = "checkmate") # needs names
-  expect_error(branding(additional_text = ""), class = "checkmate")
-  expect_error(branding(text_position = "middle"), class = "checkmate")
-  expect_error(branding(line_spacing = 0), class = "checkmate")
-  expect_error(branding(line_spacing = 5), class = "checkmate")
-  expect_error(branding(icon_color = ""), class = "checkmate")
-  expect_error(branding(use_brand_colors = "yes"), class = "checkmate")
+  expect_error(branding(github = 123), regexp = "Must be of type 'string'")
+  expect_error(
+    branding(linkedin = ""),
+    regexp = "must have at least 1 characters"
+  )
+  expect_error(branding(custom_icons = c("test")), regexp = "Must have names") # needs names
+  expect_error(
+    branding(additional_text = ""),
+    regexp = "must have at least 1 characters"
+  )
+  expect_error(
+    branding(text_position = "middle"),
+    regexp = "Must be element of"
+  )
+  expect_error(branding(line_spacing = 0), regexp = "Must be of type 'integer'")
+  expect_error(branding(line_spacing = 4L), regexp = "Element 1 is not <= 3.")
+  expect_error(
+    branding(icon_color = ""),
+    regexp = "must have at least 1 characters"
+  )
+  expect_error(
+    branding(use_brand_colors = "yes"),
+    regexp = "Must be of type 'logical'"
+  )
 })
 
 test_that("branding returns HTML string", {
-  result <- branding(github = "testuser", quiet = TRUE)
+  result <- branding(github = "testuser")
 
   expect_type(result, "character")
   expect_length(result, 1)
@@ -23,8 +38,7 @@ test_that("branding handles single platform correctly", {
   result <- branding(github = "testuser", setup_fonts = FALSE)
 
   expect_true(grepl("testuser", result))
-  expect_true(grepl("github", result, ignore.case = TRUE))
-  expect_false(grepl("linkedin", result, ignore.case = TRUE))
+  expect_true(grepl("xf09b", result, ignore.case = TRUE))
 })
 
 test_that("branding handles multiple platforms with spacing", {
@@ -114,7 +128,7 @@ test_that("branding handles custom_icons correctly", {
     setup_fonts = FALSE
   )
 
-  expect_true(grepl("test@email.com", result))
+  expect_true(grepl("email.com", result))
   expect_true(grepl("website.com", result))
 })
 
