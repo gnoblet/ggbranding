@@ -84,7 +84,7 @@ clear_font_cache_dir <- function(confirm = TRUE) {
     }
 
     # If we get here, the user failed to give a valid answer `max_tries` times
-    rlang::inform("Too many invalid attempts – cache clearing aborted.")
+    rlang::inform("Too many invalid attempts - cache clearing aborted.")
     return(FALSE)
   }
 
