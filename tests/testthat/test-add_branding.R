@@ -11,6 +11,14 @@ test_that("add_branding parameter validation works", {
     add_branding(text_family = ""),
     regexp = "must have at least 1 characters"
   )
+  expect_error(
+    add_branding(additional_text_color = ""),
+    regexp = "must have at least 1 characters"
+  )
+  expect_error(
+    add_branding(additional_text_size = ""),
+    regexp = "must have at least 1 characters"
+  )
   # text_family = NULL should be allowed
   expect_no_error(add_branding(
     github = "test",
@@ -68,6 +76,8 @@ test_that("add_branding passes parameters to branding correctly", {
     icon_color = "red",
     text_color = "blue",
     text_family = "Arial",
+    additional_text_color = "red",
+    additional_text_size = "12pt",
     setup_fonts = FALSE
   )
 
@@ -79,6 +89,8 @@ test_that("add_branding passes parameters to branding correctly", {
   expect_equal(captured_params$icon_color, "red")
   expect_equal(captured_params$text_color, "blue")
   expect_equal(captured_params$text_family, "Arial")
+  expect_equal(captured_params$additional_text_color, "red")
+  expect_equal(captured_params$additional_text_size, "12pt")
   expect_equal(captured_params$setup_fonts, FALSE)
 })
 
@@ -241,4 +253,40 @@ test_that("add_branding handles text_family parameter", {
   )
 
   expect_equal(captured_params$text_family, NULL)
+})
+
+test_that("add_branding handles additional_text styling parameters", {
+  skip_if_not_installed("ggtext")
+
+  captured_params <- NULL
+
+  local_mocked_bindings(
+    branding = function(...) {
+      captured_params <<- list(...)
+      return("mock")
+    }
+  )
+
+  # Test with custom additional text styling
+  add_branding(
+    github = "test",
+    additional_text = "Data source: Test",
+    additional_text_color = "red",
+    additional_text_size = "14pt",
+    setup_fonts = FALSE
+  )
+
+  expect_equal(captured_params$additional_text_color, "red")
+  expect_equal(captured_params$additional_text_size, "14pt")
+
+  # Test with NULL values (defaults)
+  add_branding(
+    github = "test",
+    additional_text_color = NULL,
+    additional_text_size = NULL,
+    setup_fonts = FALSE
+  )
+
+  expect_equal(captured_params$additional_text_color, NULL)
+  expect_equal(captured_params$additional_text_size, NULL)
 })

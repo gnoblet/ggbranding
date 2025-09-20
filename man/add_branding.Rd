@@ -20,7 +20,6 @@ add_branding(
   line_spacing = 1L,
   icon_color = "#666666",
   text_color = "#333333",
-  use_brand_colors = FALSE,
   icon_size = "8pt",
   text_size = "8pt",
   line_height = "1.2",
@@ -63,8 +62,6 @@ add_branding(
 \item{icon_color}{(\code{character(1)}) Color for icons. (default: "#666666")}
 
 \item{text_color}{(\code{character(1)}) Color for usernames/text. (default: "#333333")}
-
-\item{use_brand_colors}{(\code{logical(1)}) Whether to use brand-specific colors for icons. (default: FALSE)}
 
 \item{icon_size}{(\code{character(1)}) Font size for icons. (default: "8pt")}
 
@@ -127,7 +124,6 @@ ggplot(mtcars, aes(x = mpg, y = wt)) +
       envelope = "contact@example.com",
       globe = "https://mywebsite.com"
     ),
-    use_brand_colors = TRUE,
     caption_halign = 1
   )
 }

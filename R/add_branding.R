@@ -34,8 +34,6 @@
 #'   Color for icons. (default: "#666666")
 #' @typed text_color: character(1)
 #'   Color for usernames/text. (default: "#333333")
-#' @typed use_brand_colors: logical(1)
-#'   Whether to use brand-specific colors for icons. (default: FALSE)
 #' @typed icon_size: character(1)
 #'   Font size for icons. (default: "8pt")
 #' @typed text_size: character(1)
@@ -93,7 +91,6 @@
 #'       envelope = "contact@example.com",
 #'       globe = "https://mywebsite.com"
 #'     ),
-#'     use_brand_colors = TRUE,
 #'     caption_halign = 1
 #'   )
 #' }
@@ -115,7 +112,6 @@ add_branding <- function(
   line_spacing = 1L,
   icon_color = "#666666",
   text_color = "#333333",
-  use_brand_colors = FALSE,
   icon_size = "8pt",
   text_size = "8pt",
   line_height = "1.2",
@@ -151,7 +147,6 @@ add_branding <- function(
 
   checkmate::assert_string(icon_color, min.chars = 1)
   checkmate::assert_string(text_color, min.chars = 1)
-  checkmate::assert_logical(use_brand_colors, len = 1, any.missing = FALSE)
   checkmate::assert_string(icon_size, min.chars = 1)
   checkmate::assert_string(text_size, min.chars = 1)
   checkmate::assert_string(line_height, min.chars = 1)
@@ -190,7 +185,6 @@ add_branding <- function(
     line_spacing = line_spacing,
     icon_color = icon_color,
     text_color = text_color,
-    use_brand_colors = use_brand_colors,
     icon_size = icon_size,
     text_size = text_size,
     line_height = line_height,

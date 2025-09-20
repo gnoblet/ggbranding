@@ -20,7 +20,6 @@ branding(
   line_spacing = 1L,
   icon_color = "#666666",
   text_color = "#333333",
-  use_brand_colors = FALSE,
   icon_size = "8pt",
   text_size = "8pt",
   line_height = "1.2",
@@ -61,8 +60,6 @@ branding(
 
 \item{text_color}{(\code{character(1)}) Color for usernames/text. (default: "#333333")}
 
-\item{use_brand_colors}{(\code{logical(1)}) Whether to use brand-specific colors for icons. (default: FALSE)}
-
 \item{icon_size}{(\code{character(1)}) Font size for icons. (default: "8pt")}
 
 \item{text_size}{(\code{character(1)}) Font size for text/usernames. (default: "8pt")}
@@ -96,13 +93,6 @@ ggplot(mtcars, aes(x = mpg, y = wt)) +
   geom_point() +
   labs(caption = caption) +
   theme(plot.caption = ggtext::element_textbox_simple())
-
-# With custom colors
-caption <- branding(
-  github = "yourusername",
-  linkedin = "yourprofile",
-  use_brand_colors = TRUE
-)
 
 # With additional text and custom spacing
 caption <- branding(

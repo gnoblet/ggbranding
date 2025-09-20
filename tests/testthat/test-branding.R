@@ -20,11 +20,15 @@ test_that("branding parameter validation works", {
     regexp = "must have at least 1 characters"
   )
   expect_error(
-    branding(use_brand_colors = "yes"),
-    regexp = "Must be of type 'logical'"
+    branding(text_family = ""),
+    regexp = "must have at least 1 characters"
   )
   expect_error(
-    branding(text_family = ""),
+    branding(additional_text_color = ""),
+    regexp = "must have at least 1 characters"
+  )
+  expect_error(
+    branding(additional_text_size = ""),
     regexp = "must have at least 1 characters"
   )
   # text_family = NULL should be allowed
@@ -240,4 +244,49 @@ test_that("branding applies text_family correctly", {
   )
 
   expect_false(grepl("font-family:", result_null))
+})
+
+test_that("branding applies additional_text styling correctly", {
+  # Test with custom additional text color and size
+  result <- branding(
+    github = "testuser",
+    additional_text = "Data source: Test",
+    additional_text_color = "red",
+    additional_text_size = "12pt",
+    setup_fonts = FALSE
+  )
+
+  # Should contain the custom styling for additional text
+  expect_true(grepl("Data source: Test", result))
+  expect_true(grepl("color: red", result))
+  expect_true(grepl("font-size: 12pt", result))
+
+  # Test fallback behavior - should use text_color and text_size when additional_text_* are NULL
+  result_fallback <- branding(
+    github = "testuser",
+    additional_text = "Data source: Test",
+    text_color = "blue",
+    text_size = "10pt",
+    additional_text_color = NULL,
+    additional_text_size = NULL,
+    setup_fonts = FALSE
+  )
+
+  expect_true(grepl("Data source: Test", result_fallback))
+  expect_true(grepl("color: blue", result_fallback))
+  expect_true(grepl("font-size: 10pt", result_fallback))
+
+  # Test mixed usage - custom color but default size
+  result_mixed <- branding(
+    github = "testuser",
+    additional_text = "Data source: Test",
+    text_color = "black",
+    text_size = "8pt",
+    additional_text_color = "green",
+    additional_text_size = NULL,
+    setup_fonts = FALSE
+  )
+
+  expect_true(grepl("color: green", result_mixed))
+  expect_true(grepl("font-size: 8pt", result_mixed))
 })
