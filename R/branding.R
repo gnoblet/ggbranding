@@ -41,6 +41,8 @@
 #'   Font size for text/usernames. (default: "8pt")
 #' @typed line_height: character(1)
 #'   Line height for the caption. (default: "1.2")
+#' @typed text_family: character(1)
+#'   Font family for text/usernames. (default: "sans")
 #' @typed setup_fonts: logical(1)
 #'   Whether to automatically setup Font Awesome fonts. (default: TRUE)
 #'
@@ -110,6 +112,7 @@ branding <- function(
   icon_size = "8pt",
   text_size = "8pt",
   line_height = "1.2",
+  text_family = "sans",
   setup_fonts = TRUE
 ) {
   #------ PARAMETER VALIDATION ------#
@@ -146,6 +149,7 @@ branding <- function(
   checkmate::assert_string(icon_size, min.chars = 1)
   checkmate::assert_string(text_size, min.chars = 1)
   checkmate::assert_string(line_height, min.chars = 1)
+  checkmate::assert_string(text_family, min.chars = 1)
   checkmate::assert_logical(setup_fonts, len = 1, any.missing = FALSE)
 
   # names of custom icons exist in icons_df
@@ -213,7 +217,7 @@ branding <- function(
     glue::glue(
       "<span style='font-family:\"{fa_font_family}\"; ",
       "color: {icon_color}; font-size: {icon_size};'>{icon}</span> ",
-      "<span style='color: {text_color}; font-size: {text_size}; line-height: {line_height};'>",
+      "<span style='font-family: {text_family}; color: {text_color}; font-size: {text_size}; line-height: {line_height};'>",
       "{username}</span>"
     )
   }
@@ -229,7 +233,7 @@ branding <- function(
   final_caption <- branding_caption
   if (!is.null(additional_text)) {
     styled_additional_text <- glue::glue(
-      "<span style='color: {text_color}; font-size: {text_size}; line-height: {line_height};'>",
+      "<span style='font-family: {text_family}; color: {text_color}; font-size: {text_size}; line-height: {line_height};'>",
       "{additional_text}</span>"
     )
 

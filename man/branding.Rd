@@ -24,6 +24,7 @@ branding(
   icon_size = "8pt",
   text_size = "8pt",
   line_height = "1.2",
+  text_family = "sans",
   setup_fonts = TRUE
 )
 }
@@ -65,6 +66,8 @@ branding(
 \item{text_size}{(\code{character(1)}) Font size for text/usernames. (default: "8pt")}
 
 \item{line_height}{(\code{character(1)}) Line height for the caption. (default: "1.2")}
+
+\item{text_family}{(\code{character(1)}) Font family for text/usernames. (default: "sans")}
 
 \item{setup_fonts}{(\code{logical(1)}) Whether to automatically setup Font Awesome fonts. (default: TRUE)}
 }

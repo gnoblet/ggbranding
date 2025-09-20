@@ -23,6 +23,10 @@ test_that("branding parameter validation works", {
     branding(use_brand_colors = "yes"),
     regexp = "Must be of type 'logical'"
   )
+  expect_error(
+    branding(text_family = ""),
+    regexp = "must have at least 1 characters"
+  )
 })
 
 test_that("branding returns HTML string", {
@@ -202,4 +206,22 @@ test_that("branding applies styling correctly", {
   expect_true(grepl("color: blue", result))
   expect_true(grepl("font-size: 12pt", result))
   expect_true(grepl("font-size: 10pt", result))
+})
+
+test_that("branding applies text_family correctly", {
+  result <- branding(
+    github = "testuser",
+    text_family = "Arial",
+    setup_fonts = FALSE
+  )
+
+  expect_true(grepl("font-family: Arial", result))
+
+  # Test default text_family
+  result_default <- branding(
+    github = "testuser",
+    setup_fonts = FALSE
+  )
+
+  expect_true(grepl("font-family: sans", result_default))
 })

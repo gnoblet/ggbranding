@@ -7,6 +7,10 @@ test_that("add_branding parameter validation works", {
     add_branding(caption_halign = 2),
     regexp = "Element 1 is not <= 1."
   )
+  expect_error(
+    add_branding(text_family = ""),
+    regexp = "must have at least 1 characters"
+  )
 })
 
 test_that("add_branding requires ggtext package", {
@@ -57,6 +61,7 @@ test_that("add_branding passes parameters to branding correctly", {
     line_spacing = 2L,
     icon_color = "red",
     text_color = "blue",
+    text_family = "Arial",
     setup_fonts = FALSE
   )
 
@@ -67,6 +72,7 @@ test_that("add_branding passes parameters to branding correctly", {
   expect_equal(captured_params$line_spacing, 2L)
   expect_equal(captured_params$icon_color, "red")
   expect_equal(captured_params$text_color, "blue")
+  expect_equal(captured_params$text_family, "Arial")
   expect_equal(captured_params$setup_fonts, FALSE)
 })
 
@@ -191,4 +197,33 @@ test_that("add_branding handles edge cases", {
     setup_fonts = FALSE
   )
   expect_length(result_text_only, 2)
+})
+
+test_that("add_branding handles text_family parameter", {
+  skip_if_not_installed("ggtext")
+
+  captured_params <- NULL
+
+  local_mocked_bindings(
+    branding = function(...) {
+      captured_params <<- list(...)
+      return("mock")
+    }
+  )
+
+  add_branding(
+    github = "test",
+    text_family = "Times",
+    setup_fonts = FALSE
+  )
+
+  expect_equal(captured_params$text_family, "Times")
+
+  # Test default text_family
+  add_branding(
+    github = "test",
+    setup_fonts = FALSE
+  )
+
+  expect_equal(captured_params$text_family, "sans")
 })
