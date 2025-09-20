@@ -192,7 +192,7 @@ branding <- function(
     username <- sanitize_chr(item$username)
 
     # grab the icon and style for this platform
-    icon_data <- subset(icons_df, name == platform)
+    icon_data <- icons_df[icons_df$name == platform, ]
 
     if (nrow(icon_data) > 0) {
       icon <- icon_data[['unicode_full']][1]
