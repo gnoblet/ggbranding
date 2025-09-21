@@ -3,7 +3,7 @@
 
 # ggbranding
 
-<a href="https://gnoblet.github.io/ggbranding/"><img src="man/figures/logo.svg" align="right" height="139" alt="ggbranding website" /></a>
+<a href="https://gnoblet.github.io/ggbranding/"><img src="man/figures/logo.png" align="right" height="139" alt="ggbranding website" /></a>
 
 <!-- badges: start -->
 
