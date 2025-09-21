@@ -30,9 +30,10 @@ Suggests:
     jsonlite,
     roxytypes,
     testthat (>= 3.0.0)
-Config/Needs/documentation:roxytypes
+Config/Needs/documentation: roxytypes
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, packages = "roxytypes")
 RoxygenNote: 7.3.3
+BugReports: https://github.com/gnoblet/ggbranding/issues
