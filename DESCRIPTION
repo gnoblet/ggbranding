@@ -1,0 +1,37 @@
+Package: ggbranding
+Title: Add personal branding to ggplot2 charts using Font Awesome 7 icons
+Version: 1.0.0
+Authors@R:
+    person("Guillaume", "Noblet", , "gnoblet@zaclys.net", role = c("aut", "cre"))
+Description: Easily add personal branding elements like social media icons
+    to ggplot2 charts. Provides simple functions to add GitHub, GitLab,
+    LinkedIn, Bluesky, and other brand icons to plot captions with
+    minimal effort. Automatically downloads Font Awesome fonts from
+    official sources if not already available.
+License: GPL (>= 3)
+Depends: 
+    R (>= 4.1.0)
+Imports:
+    checkmate,
+    fs,
+    ggplot2,
+    ggtext,
+    glue,
+    httr2,
+    purrr,
+    rappdirs,
+    rlang,
+    showtext,
+    stringr,
+    sysfonts,
+    utils
+Suggests:
+    jsonlite,
+    roxytypes,
+    testthat (>= 3.0.0)
+Config/Needs/documentation:roxytypes
+Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE, packages = "roxytypes")
+RoxygenNote: 7.3.3
