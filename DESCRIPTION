@@ -8,7 +8,7 @@ Description: Easily add personal branding elements like social media icons
     LinkedIn, Bluesky, and other brand icons to plot captions with
     minimal effort. Automatically downloads Font Awesome 7 fonts from
     official sources if not already available.
-URL: https://gnoblet.github.io/ggbranding, https://github.com/gnoblet/ggbranding
+URL: https://gnoblet.github.io/ggbranding/, https://github.com/gnoblet/ggbranding/
 License: GPL (>= 3)
 Depends: 
     R (>= 4.1.0)
