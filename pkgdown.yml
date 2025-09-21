@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-09-21T10:35Z
+last_built: 2025-09-21T12:07Z
 urls:
   reference: https://gnoblet.github.io/ggbranding/reference
   article: https://gnoblet.github.io/ggbranding/articles
