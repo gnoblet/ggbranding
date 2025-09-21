@@ -13,9 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ggbranding
-
-<a href="https://gnoblet.github.io/ggbranding/"><img src="man/figures/logo.png" align="right" height="139" alt="ggbranding website" /></a>
+# ggbranding <a href="https://gnoblet.github.io/ggbranding/"><img src="man/figures/logo.png" align="right" height="139" alt="ggbranding website" /></a>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/gnoblet/ggbranding/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gnoblet/ggbranding/actions/workflows/R-CMD-check.yaml)
@@ -53,7 +51,7 @@ library(showtext)
 library(sysfonts)
 
 # setup dpi
-showtext::showtext_opts(dpi = 240)
+showtext::showtext_opts(dpi = 300)
 
 # add branding with + in ggplot chain
 ggplot(mtcars, aes(x = mpg, y = wt)) +
@@ -114,7 +112,7 @@ ggplot(mtcars, aes(x = mpg, y = wt)) +
     bluesky = "@gnoblet",
     custom_icons = c(
       envelope = "gnoblet@fake.news",
-      rss = "https://gnoblet.github.io"
+      rss = "gnoblet.github.io"
     )
   )
 ```
@@ -190,7 +188,7 @@ branding(github = "username", setup_fonts = FALSE)
 
 ## License
 
-GPL v3 or later. See the [LICENSE](LICENSE) file for details.
+GPL v3 or later. See the [LICENSE](LICENSE.md) file for details.
 
 ## Citation
 
