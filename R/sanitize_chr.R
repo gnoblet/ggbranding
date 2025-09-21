@@ -22,6 +22,8 @@
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 sanitize_chr <- function(x) {
   #------ PARAMETER VALIDATION ------#
 
