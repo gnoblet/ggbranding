@@ -2,7 +2,7 @@ Package: ggbranding
 Title: Add personal branding to ggplot2 charts using Font Awesome 7 icons
 Version: 1.0.0
 Authors@R:
-    person("Guillaume", "Noblet", , "gnoblet@zaclys.net", role = c("aut", "cre"))
+    person("Guillaume", "Noblet", , "gnoblet@zaclys.net", role = c("aut", "cre", "cph"))
 Description: Easily add personal branding elements like social media icons
     to ggplot2 charts. Provides simple functions to add GitHub, GitLab,
     LinkedIn, Bluesky, and other brand icons to plot captions with
