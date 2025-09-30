@@ -6,7 +6,7 @@
 #'   Absolute path to the Font Awesome fonts cache directory.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Get font cache directory
 #' cache_dir <- get_font_cache_dir()
 #' print(cache_dir)

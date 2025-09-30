@@ -9,7 +9,7 @@
 #'   TRUE if cache was cleared successfully, FALSE otherwise.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Clear font cache
 #' clear_font_cache_dir()
 #'
