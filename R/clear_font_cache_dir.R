@@ -8,15 +8,6 @@
 #' @typedreturn logical(1)
 #'   TRUE if cache was cleared successfully, FALSE otherwise.
 #'
-#' @examples
-#' \donttest{
-#' # Clear font cache
-#' clear_font_cache_dir()
-#'
-#' # Clear without confirmation
-#' clear_font_cache_dir(confirm = FALSE)
-#' }
-#'
 #' @export
 clear_font_cache_dir <- function(confirm = TRUE) {
   #------ PARAMETER VALIDATION ------#
