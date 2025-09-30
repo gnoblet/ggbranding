@@ -14,7 +14,7 @@
 #'   A data frame with available icons and their metadata
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # List all available icons
 #' list_available_icons()
 #'

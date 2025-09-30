@@ -1,5 +1,4 @@
 
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # ggbranding <a href="https://gnoblet.github.io/ggbranding/"><img src="man/figures/logo.png" align="right" height="139" alt="ggbranding website" /></a>
@@ -8,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/gnoblet/ggbranding/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gnoblet/ggbranding/actions/workflows/R-CMD-check.yaml)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/ggbranding.png)](https://CRAN.R-project.org/package=ggbranding)
+status](https://www.r-pkg.org/badges/version/ggbranding)](https://CRAN.R-project.org/package=ggbranding)
 [![Codecov test
 coverage](https://codecov.io/gh/gnoblet/ggbranding/graph/badge.svg)](https://app.codecov.io/gh/gnoblet/ggbranding)
 <!-- badges: end -->
@@ -17,15 +16,14 @@ coverage](https://codecov.io/gh/gnoblet/ggbranding/graph/badge.svg)](https://app
 
 **Key Features:**
 
--   🚀 **Auto Font Setup** - Automatically downloads Font Awesome 7
-    fonts on first use
--   🎨 **500+ Icons** - Access to all Font Awesome brand and
-    communication icons
--   🎯 **One Function Call** - Add complete branding with
-    `add_branding()`
--   🎨 **Customizable** - Brand colors, custom text, and styling options
--   📦 **Lightweight** - Efficient font caching and quite minimal
-    dependencies
+- 🚀 **Auto Font Setup** - Automatically downloads Font Awesome 7 fonts
+  on first use
+- 🎨 **500+ Icons** - Access to all Font Awesome brand and communication
+  icons
+- 🎯 **One Function Call** - Add complete branding with `add_branding()`
+- 🎨 **Customizable** - Brand colors, custom text, and styling options
+- 📦 **Lightweight** - Efficient font caching and quite minimal
+  dependencies
 
 ## Installation
 
@@ -62,14 +60,14 @@ ggplot(mtcars, aes(x = mpg, y = wt)) +
   )
 ```
 
-<img src="man/figures/README-quick-start-1.png" style="width:100.0%" />
+<img src="man/figures/README-quick-start-1.png" width="100%" />
 
 That’s it! The function automatically:
 
--   Downloads and sets up Font Awesome 7 fonts
--   Applies `ggtext::element_textbox_simple()` theme
--   Creates HTML-formatted captions with icons
--   Handles text sanitization for grid rendering
+- Downloads and sets up Font Awesome 7 fonts
+- Applies `ggtext::element_textbox_simple()` theme
+- Creates HTML-formatted captions with icons
+- Handles text sanitization for grid rendering
 
 ## Uses Examples
 
@@ -91,8 +89,7 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
   )
 ```
 
-<img src="man/figures/README-add-branding-basic-1.png"
-style="width:100.0%" />
+<img src="man/figures/README-add-branding-basic-1.png" width="100%" />
 
 ``` r
 
@@ -111,8 +108,7 @@ ggplot(mtcars, aes(x = mpg, y = wt)) +
   )
 ```
 
-<img src="man/figures/README-add-branding-basic-2.png"
-style="width:100.0%" />
+<img src="man/figures/README-add-branding-basic-2.png" width="100%" />
 
 ``` r
 
@@ -131,69 +127,23 @@ ggplot(mtcars, aes(x = mpg, y = wt)) +
 #> unicode: 'xf0c1'.
 ```
 
-<img src="man/figures/README-add-branding-basic-3.png"
-style="width:100.0%" />
+<img src="man/figures/README-add-branding-basic-3.png" width="100%" />
 
 ## Supported Platforms
 
 Built-in support for major platforms:
 
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Parameter</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GitHub</td>
-<td><code>github</code></td>
-<td><code>github = "username"</code></td>
-</tr>
-<tr>
-<td>GitLab</td>
-<td><code>gitlab</code></td>
-<td><code>gitlab = "username"</code></td>
-</tr>
-<tr>
-<td>LinkedIn</td>
-<td><code>linkedin</code></td>
-<td><code>linkedin = "profile"</code></td>
-</tr>
-<tr>
-<td>Bluesky</td>
-<td><code>bluesky</code></td>
-<td><code>bluesky = "user.bsky.social"</code></td>
-</tr>
-<tr>
-<td>Twitter/X</td>
-<td><code>twitter</code></td>
-<td><code>twitter = "handle"</code></td>
-</tr>
-<tr>
-<td>Mastodon</td>
-<td><code>mastodon</code></td>
-<td><code>mastodon = "@user@server.com"</code></td>
-</tr>
-<tr>
-<td>ORCID</td>
-<td><code>orcid</code></td>
-<td><code>orcid = "0000-0000-0000-0000"</code></td>
-</tr>
-<tr>
-<td>Email</td>
-<td><code>email</code></td>
-<td><code>email = "user@email.com"</code></td>
-</tr>
-<tr>
-<td>Website</td>
-<td><code>website</code></td>
-<td><code>website = "yoursite.com"</code></td>
-</tr>
-</tbody>
-</table>
+| Platform  | Parameter  | Example                         |
+|-----------|------------|---------------------------------|
+| GitHub    | `github`   | `github = "username"`           |
+| GitLab    | `gitlab`   | `gitlab = "username"`           |
+| LinkedIn  | `linkedin` | `linkedin = "profile"`          |
+| Bluesky   | `bluesky`  | `bluesky = "user.bsky.social"`  |
+| Twitter/X | `twitter`  | `twitter = "handle"`            |
+| Mastodon  | `mastodon` | `mastodon = "@user@server.com"` |
+| ORCID     | `orcid`    | `orcid = "0000-0000-0000-0000"` |
+| Email     | `email`    | `email = "user@email.com"`      |
+| Website   | `website`  | `website = "yoursite.com"`      |
 
 ## Custom Icons
 
@@ -248,10 +198,6 @@ showtext::showtext_auto()
 branding(github = "username", setup_fonts = FALSE)
 ```
 
-## License
-
-GPL v3 or later. See the [LICENSE](LICENSE.md) file for details.
-
 ## Citation
 
 ``` r
@@ -260,10 +206,10 @@ citation("ggbranding")
 
 ## Acknowledgments
 
--   Inspired by [Nicola Rennie’s blog
-    post](https://nrennie.rbind.io/blog/adding-social-media-icons-ggplot2/)
--   Font Awesome team for their marvelous icoms
--   R community for ggplot2, ggtext, and ecosystem packages
+- Inspired by [Nicola Rennie’s blog
+  post](https://nrennie.rbind.io/blog/adding-social-media-icons-ggplot2/)
+- Font Awesome team for their marvelous icoms
+- R community for ggplot2, ggtext, and ecosystem packages
 
 ------------------------------------------------------------------------
 

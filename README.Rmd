@@ -186,10 +186,6 @@ showtext::showtext_auto()
 branding(github = "username", setup_fonts = FALSE)
 ```
 
-## License
-
-GPL v3 or later. See the [LICENSE](LICENSE.md) file for details.
-
 ## Citation
 
 ```{r citation, eval=FALSE}

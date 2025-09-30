@@ -10,7 +10,7 @@
 #'   Sanitized character vector with zero-width spaces added
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Sanitize email addresses
 #' sanitize_chr("contact@example.com")
 #'
