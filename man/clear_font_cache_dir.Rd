@@ -16,7 +16,7 @@ clear_font_cache_dir(confirm = TRUE)
 Removes cached Font Awesome fonts to free up space or force re-download.
 }
 \examples{
-\dontrun{
+\donttest{
 # Clear font cache
 clear_font_cache_dir()
 
