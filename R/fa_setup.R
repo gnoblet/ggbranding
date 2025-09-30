@@ -14,7 +14,7 @@
 #'   TRUE if fonts were successfully loaded, FALSE otherwise.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Setup fonts with auto-download
 #' fa_setup()
 #'
