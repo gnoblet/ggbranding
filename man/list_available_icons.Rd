@@ -21,7 +21,7 @@ Shows all available icons from the icons_df dataset that can be used
 in the custom_icons parameter of branding() and add_branding() functions.
 }
 \examples{
-\dontrun{
+\donttest{
 # List all available icons
 list_available_icons()
 
