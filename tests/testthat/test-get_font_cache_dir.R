@@ -1,15 +1,25 @@
+# File: tests/testthat/helper-load-rappdirs.R
+# Ensure rappdirs namespace is loaded so mocked bindings exist
+loadNamespace("rappdirs")
+
+# ------------------------------------------------------------------------------
+
+# File: tests/testthat/test-get_font_cache_dir.R
 test_that("get_font_cache_dir returns a valid directory path", {
   temp_dir <- fs::file_temp()
 
   with_mocked_bindings(
-    `rappdirs::user_cache_dir` = function(...) temp_dir,
+    user_cache_dir = function(...) temp_dir,
+    .package = "rappdirs",
     {
       cache_dir <- get_font_cache_dir()
 
       expect_type(cache_dir, "character")
       expect_length(cache_dir, 1)
       expect_true(fs::is_absolute_path(cache_dir))
-      expect_true(grepl("ggbranding", cache_dir) || identical(cache_dir, temp_dir))
+      expect_true(
+        grepl("ggbranding", cache_dir) || identical(cache_dir, temp_dir)
+      )
       expect_true(fs::dir_exists(cache_dir))
     }
   )
@@ -21,7 +31,8 @@ test_that("get_font_cache_dir is consistent across calls", {
   temp_dir <- fs::file_temp()
 
   with_mocked_bindings(
-    `rappdirs::user_cache_dir` = function(...) temp_dir,
+    user_cache_dir = function(...) temp_dir,
+    .package = "rappdirs",
     {
       cache_dir1 <- get_font_cache_dir()
       cache_dir2 <- get_font_cache_dir()
@@ -37,7 +48,8 @@ test_that("get_font_cache_dir uses rappdirs correctly", {
   temp_dir <- fs::file_temp()
 
   with_mocked_bindings(
-    `rappdirs::user_cache_dir` = function(...) temp_dir,
+    user_cache_dir = function(...) temp_dir,
+    .package = "rappdirs",
     {
       expected <- temp_dir
       actual <- get_font_cache_dir()
@@ -53,7 +65,8 @@ test_that("get_font_cache_dir creates directory if missing", {
   temp_dir <- fs::file_temp()
 
   with_mocked_bindings(
-    `rappdirs::user_cache_dir` = function(...) temp_dir,
+    user_cache_dir = function(...) temp_dir,
+    .package = "rappdirs",
     {
       cache_dir <- get_font_cache_dir()
 
