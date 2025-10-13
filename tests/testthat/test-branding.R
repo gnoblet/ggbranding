@@ -234,7 +234,8 @@ test_that("branding applies text_family correctly", {
     setup_fonts = FALSE
   )
 
-  expect_false(grepl("font-family:", result_default))
+  # should only find one font-family for the icon which is Font Awesome
+  expect_equal(length(gregexpr("font-family:", result_default)[[1]]), 1)
 
   # Test with NULL explicitly
   result_null <- branding(
@@ -243,7 +244,7 @@ test_that("branding applies text_family correctly", {
     setup_fonts = FALSE
   )
 
-  expect_false(grepl("font-family:", result_null))
+  expect_equal(length(gregexpr("font-family:", result_null)[[1]]), 1)
 })
 
 test_that("branding applies additional_text styling correctly", {

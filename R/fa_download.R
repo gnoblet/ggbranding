@@ -13,7 +13,7 @@
 #'   Named list with paths to downloaded font files ('brands' and 'free_solid'), or NULL values if download failed.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Download latest Font Awesome fonts
 #' font_paths <- fa_download()
 #' }

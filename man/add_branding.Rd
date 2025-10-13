@@ -92,7 +92,7 @@ both theme styling (using element_textbox_simple from ggtext) and branded
 captions to your ggplot2 charts.
 }
 \examples{
-\dontrun{
+\donttest{
 library(ggplot2)
 library(ggtext)
 library(ggbranding)

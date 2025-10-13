@@ -13,7 +13,7 @@ get_font_cache_dir()
 Returns the package directory where Font Awesome fonts are/should be cached.
 }
 \examples{
-\dontrun{
+\donttest{
 # Get font cache directory
 cache_dir <- get_font_cache_dir()
 print(cache_dir)

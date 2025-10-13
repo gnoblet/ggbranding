@@ -14,11 +14,6 @@
 #'   \item{generation_info}{List of generation metadata}
 #' }
 #'
-#' @source
-#' - Font Awesome: \url{https://fontawesome.com/}
-#' - Simple Icons: \url{https://simpleicons.org/}
-#' - Brand Colors: \url{https://brandcolors.net/}
-#'
 #' @examples
 #' # Access GitHub icon
 #' icons_df$icons$github

@@ -15,13 +15,6 @@ A list with the following components:
 \item{generation_info}{List of generation metadata}
 }
 }
-\source{
-\itemize{
-\item Font Awesome: \url{https://fontawesome.com/}
-\item Simple Icons: \url{https://simpleicons.org/}
-\item Brand Colors: \url{https://brandcolors.net/}
-}
-}
 \usage{
 icons_df
 }

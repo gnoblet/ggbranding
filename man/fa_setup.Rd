@@ -21,7 +21,7 @@ Automatically sets up Font Awesome fonts, downloading them if necessary.
 Sets up both Brands and Free Solid font families.
 }
 \examples{
-\dontrun{
+\donttest{
 # Setup fonts with auto-download
 fa_setup()
 

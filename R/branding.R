@@ -52,7 +52,7 @@
 #'   A character string containing HTML-formatted caption text
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(ggplot2)
 #' library(ggtext)
 #'

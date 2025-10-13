@@ -82,7 +82,7 @@ This function creates a formatted caption with social media icons and usernames
 that can be easily added to ggplot2 charts for personal branding.
 }
 \examples{
-\dontrun{
+\donttest{
 library(ggplot2)
 library(ggtext)
 

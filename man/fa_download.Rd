@@ -20,7 +20,7 @@ fa_download(version = "7.0.1", force_download = FALSE, quiet = FALSE)
 Downloads Font Awesome fonts from the official GitHub releases if not already cached.
 }
 \examples{
-\dontrun{
+\donttest{
 # Download latest Font Awesome fonts
 font_paths <- fa_download()
 }

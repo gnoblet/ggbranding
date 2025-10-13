@@ -59,7 +59,7 @@
 #'   A list of ggplot2 components that can be added with `+`
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(ggplot2)
 #' library(ggtext)
 #' library(ggbranding)
